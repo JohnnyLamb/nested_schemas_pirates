@@ -5,22 +5,24 @@ var Ship = require('../models/ships');
 var mongoose = require('mongoose-q')(require('mongoose'));
 
 router.get('/', function(req, res, next) {
-  User.find(function(err,response){
-      if(err){
-        res.json({message:err});
-      } else{
-        res.json(response);
-      }
-  });
+  User.find()
+    .populate('ships')
+    .exec(function(err, user) {
+        if(err) {
+            res.send(err);
+        } else {
+            res.json(user.ships);
+        }
+    });
 
 });
 
 //save a new user
 router.post('/', function(req, res, next) {
     var newUser = new User({
-      name:req.body.name
+      name:req.body.username
     });
-    console.log(req.body.name);
+    console.log(req.body.username);
     newUser.saveQ()
     .then(function(result) {
         res.json(result);
@@ -49,7 +51,7 @@ router.put('/:userid/ships', function(req, res, next) {
     });
 });
 
-//list a users events
+//list a users ships
 router.get('/:userid/ships', function(req, res, next) {
   // var id = req.params.userid;
   console.log(req.params.userid);
@@ -63,6 +65,7 @@ router.get('/:userid/ships', function(req, res, next) {
         }
     });
 });
+
 
 
 module.exports = router;
