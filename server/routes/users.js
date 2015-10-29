@@ -7,6 +7,7 @@ var mongoose = require('mongoose-q')(require('mongoose'));
 
 
 router.get('/', function(req, res, next) {
+    console.log('for the love!')
   User.find()
     .populate('ships')
     .exec(function(err, user) {
@@ -25,7 +26,7 @@ router.post('/', function(req, res, next) {
     var newUser = new User({
       name:req.body.username
     });
-    console.log(req.body.username);
+    console.log('youre actually hitting this route');
     newUser.saveQ()
     .then(function(result) {
         res.json(result);
@@ -37,13 +38,9 @@ router.post('/', function(req, res, next) {
 });
 
 
-
-
-
-
-
 //save a ship to a user
 router.put('/:userid/ships', function(req, res, next) {
+    console.log('hitting the right route');
     var newShip = new Ship(req.body);
     newShip.saveQ();
 
@@ -52,34 +49,8 @@ router.put('/:userid/ships', function(req, res, next) {
     var id = req.params.userid;
 
     User.findByIdAndUpdateQ(id, update, options)
-    .then(function(result) {
-        res.json(result);
-    })
-    .catch(function(err) {
-        res.send(err);
-    });
-});
-
-//list a users ships
-router.get('/:userid/ships', function(req, res, next) {
-  // var id = req.params.userid;
-  console.log(req.params.userid);
-    User.findById(req.params.userid)
     .populate('ships')
     .exec(function(err, user) {
-        if(err) {
-            res.send(err);
-        } else {
-            res.json(user.ships);
-        }
-    });
-});
-
-// get a single user
-router.get('/:userid/', function(req, res, next) {
-  // var id = req.params.userid;
-  console.log(req.params.userid);
-    User.findById(req.params.userid,function(err, user) {
         if(err) {
             res.send(err);
         } else {
@@ -87,6 +58,34 @@ router.get('/:userid/', function(req, res, next) {
         }
     });
 });
+
+//list a users ships
+router.get('/:userid/ships', function(req, res, next) {
+  // var id = req.params.userid;
+  console.log("why would this happen? "+req.params.userid);
+    User.findById(req.params.userid)
+    .populate('ships')
+    .exec(function(err, user) {
+        if(err) {
+            res.send(err);
+        } else {
+            res.json(user);
+        }
+    });
+});
+
+// get a single user
+// router.get('/:userid/', function(req, res, next) {
+//   // var id = req.params.userid;
+//   console.log(req.params.userid);
+//     User.findById(req.params.userid,function(err, user) {
+//         if(err) {
+//             res.send(err);
+//         } else {
+//             res.json(user);
+//         }
+//     });
+// });
 
 
 

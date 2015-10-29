@@ -6,7 +6,7 @@ app.controller('shipsController', ['$scope', '$http', '$location','getIdService'
     var payload = {
       'username': $scope.username
     };
-    $http.post('users', payload).then(function(response) {
+    $http.post('/users', payload).then(function(response) {
       console.log(response);
       // $scope.addedEvents = payload.data.events;
     });
@@ -17,11 +17,11 @@ app.controller('shipsController', ['$scope', '$http', '$location','getIdService'
 
   // get all users
   $scope.getUsers = function() {
-    $http.get('/users/ships')
+    $http.get('/users')
       .success(function(data) {
         $scope.users = data;
-        // $scope.ships = data.ships;
-        // console.log(data);
+
+        console.log(data);
       })
       .error(function(err) {
         console.log(err);
@@ -35,31 +35,21 @@ app.controller('shipsController', ['$scope', '$http', '$location','getIdService'
     console.log(getIdService.id);
     var id = getIdService.id;
     var payload = {
-      'name': $scope.name,
-      'missions': $scope.missions
+      'name': $scope.shipname,
+      'missions': $scope.shipmissions
     };
-    $http.put('users/' + id + '/ships', payload).then(function(response) {
-      console.log(response);
-      // $location.path(response);
-      // $scope.addedEvents = payload.data.events;
+    console.log(payload);
+    $http.put('/users/' + id + '/ships', payload).then(function(response) {
+      console.log(response.data);
+
+      $scope.addedShips = response.data.ships;
     });
 
   };
 
-  //get single users
-
+  //get single user id
   $scope.getSingleUserId = function(data) {
-    console.log(data._id);
     getIdService.id = data._id;
-    // $http.get('/users/ships')
-    //  .success(function(data) {
-    //    $scope.users = data;
-    //    // $scope.ships = data.ships;
-    //   console.log(data);
-    //  })
-    //  .error(function(err) {
-    //     console.log(err);
-    //  });
   };
 
 

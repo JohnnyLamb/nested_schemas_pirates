@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
     name: req.body.name,
     missions: req.body.missions
   });
-  console.log(req.body.name);
+  console.log("why god !!  "+req.body.name);
   newShip.saveQ()
     .then(function(result) {
       res.json(result);

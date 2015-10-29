@@ -22,9 +22,43 @@
   <button type="submit" class="btn btn-default" ng-click="getUsers()">let's see the users</button>
   </div>
 
-  <div>
+<!--   <div>
     <ul ng-repeat='user in users'>
-      <li ng-repeat='ship in user.ships'><a ng-click='getSingleUserId(user)' href='#/user'>{{user.name}} {{ship.name}}</a></li>
+
+      <li ng-repeat='ship in user.ships'><a ng-click='getSingleUserId(user)' href='#/user'>{{user.name}} {{ship.name}}</a>
+
+      </li>
 
     </ul>
-  </div>
+  </div> -->
+
+<h3>Users</h3>
+     <ul ng-repeat="user in users">
+       <h4>Pirate</h4>
+       <li><a href="#/user" ng-click="getSingleUserId(user)">{{user.name}}</a></li>
+         <ul ng-repeat="ship in user.ships">
+           <h4>Ships</h4>
+            <li>{{ship.name}}</li>
+            <li>{{ship.mission}}</li>
+         </ul>
+     </ul>
+     <ul ng-repeat="ship in user.ships">
+           <h4>Ships</h4>
+            <li>{{ship.name}}</li>
+            <li>{{ship.mission}}</li>
+         </ul>
+
+
+
+
+<!--   <div>
+ <ul ng-repeat='user in users'>
+   <a href='#/user' ng-click='getSingleUserId(user)'><li>{{user.name}}</li></a>
+   <li ng-repeat='ship in user.ships'>{{ship.name}}</li>
+ </ul>
+</div>
+
+ -->
+
+
+
