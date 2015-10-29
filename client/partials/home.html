@@ -1,15 +1,30 @@
-<h1>HOME FREAKING PAGE</h1>
+<div class="container">
+ <h1 >Add a User {{username}}</h2>
+  <form class="form">
+    <div class="form-group">
+      <label>username</label>
+      <input type="text" class="form-control" name="username" ng-model="username" required>
+    </div>
+    <div>
+    <button ng-click='addUser()' type="submit" class="btn btn-default">Submit User</button>
+      </div>
+  </form>
+
+  <label>Show my ships</label>
+  <div>
+  <button type="submit" class="btn btn-default" ng-disabled="disabled">let's see the ships</button>
+  </div>
 
 
 
+  <label>Show the Users</label>
+  <div>
+  <button type="submit" class="btn btn-default" ng-click="getUsers()">let's see the users</button>
+  </div>
 
-<div ng-controller="logoutController">
-  <a ng-click='logout()' class="btn btn-default">Logout</a>
-</div>
-<div>
-<br>
+  <div>
+    <ul ng-repeat='user in users'>
+      <li ng-repeat='ship in user.ships'><a ng-click='getSingleUserId(user)' href='#/user'>{{user.name}} {{ship.name}}</a></li>
 
-<div>
-  <button class="btn btn-default"><a style="text-decoration: none;" href='#/register'>Register</a></button>
-</div>
-<div>
+    </ul>
+  </div>

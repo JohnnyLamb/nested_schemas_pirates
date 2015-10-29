@@ -4,6 +4,8 @@ var User = require('../models/users');
 var Ship = require('../models/ships');
 var mongoose = require('mongoose-q')(require('mongoose'));
 
+
+
 router.get('/', function(req, res, next) {
   User.find()
     .populate('ships')
@@ -11,11 +13,12 @@ router.get('/', function(req, res, next) {
         if(err) {
             res.send(err);
         } else {
-            res.json(user.ships);
+            res.json(user);
         }
     });
 
 });
+
 
 //save a new user
 router.post('/', function(req, res, next) {
@@ -32,6 +35,12 @@ router.post('/', function(req, res, next) {
     })
     .done();
 });
+
+
+
+
+
+
 
 //save a ship to a user
 router.put('/:userid/ships', function(req, res, next) {
@@ -62,6 +71,19 @@ router.get('/:userid/ships', function(req, res, next) {
             res.send(err);
         } else {
             res.json(user.ships);
+        }
+    });
+});
+
+// get a single user
+router.get('/:userid/', function(req, res, next) {
+  // var id = req.params.userid;
+  console.log(req.params.userid);
+    User.findById(req.params.userid,function(err, user) {
+        if(err) {
+            res.send(err);
+        } else {
+            res.json(user);
         }
     });
 });

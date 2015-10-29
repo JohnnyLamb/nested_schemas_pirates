@@ -3,59 +3,17 @@
 
 <head >
   <meta charset="utf-8">
-  <title>Night Life</title>
+  <title>Pirates</title>
   <!-- styles -->
   <link href="//bootswatch.com/slate/bootstrap.min.css" rel="stylesheet">
 </head>
 <body ng-controller='shipsController'>
-<div class="container">
- <h1 >Add a User {{username}}</h2>
-  <form class="form">
-    <div class="form-group">
-      <label>username</label>
-      <input type="text" class="form-control" name="username" ng-model="username" required>
-    </div>
-    <div>
-    <button ng-click='addUser()' type="submit" class="btn btn-default">Submit User</button>
-      </div>
-  </form>
 
-  <label>Show my ships</label>
-  <div>
-  <button type="submit" class="btn btn-default" ng-disabled="disabled">let's see the ships</button>
+
+
+ <div class="container">
+    <div ng-view></div>
   </div>
-
-
-
-  <h1>Add Ships</h2>
-  <form class="form" ng-submit="addShip()">
-    <div class="form-group">
-      <label>name of ships</label>
-      <input type="text" class="form-control" name="shipname" ng-model="shipForm.name" required>
-    </div>
-    <div class="form-group">
-      <label>how many missions</label>
-        <input type="number" class="form-control" name="missions" ng-model="shipForm.missions" required>
-      </div>
-      <div>
-        <button type="submit" class="btn btn-default" ng-disabled="disabled">Add Ship</button>
-      </div>
-  </form>
-
-
-  <label>Show the Users</label>
-  <div>
-  <button type="submit" class="btn btn-default" ng-click="getUsers()">let's see the users</button>
-  </div>
-
-  <div ng-model='userData'>
-    <ul ng-repeat='user in users'>
-      <li>{{user.name}}</li>
-    </ul>
-  </div>
-
-
-
 
 
 
@@ -67,8 +25,10 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.min.js"></script>
   <script src="//code.angularjs.org/1.3.15/angular-resource.min.js"></script>
   <script src="./js/main.js"></script>
+  <script src="./js/router.js"></script>
+  <script src="./js/services.js"></script>
 
- <!--  // <script src="./js/controllers.js"></script> -->
+
 
 </body>
 </html>
